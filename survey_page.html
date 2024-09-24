@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <title>Survey Page</title>
+</head>
+<body>
+    <div class="survey-container">
+        <h1>Survey Form</h1>
+        <form action="patient_register.html" method="POST">
+           
+             <!-- Age Radio Buttons -->
+             <div class="form-group">
+                <label>Age:</label>
+                <label><input type="radio" name="gender" value="13-20" required>13-20</label>
+                <label><input type="radio" name="gender" value="20-30"> 20-30</label>
+                <label><input type="radio" name="gender" value="greater than 30"> greater than 30</label>
+<br>
+            </div>
+
+            <!-- Gender Radio Buttons -->
+            <div class="form-group">
+                <label>Gender:</label>
+                <label><input type="radio" name="gender" value="Male" required> Male</label>
+                <label><input type="radio" name="gender" value="Female"> Female</label>
+                <label><input type="radio" name="gender" value="Other"> Other</label>
+            </div>
+
+            <!-- Multiple Choice Questions -->
+            <div class="form-group">
+                <h3>1.What emotions do you experience most frequently?</h3>
+                <label><input type="radio" name="exercise" value="sadness" required> sadneess</label><br>
+                <label><input type="radio" name="exercise" value="anxiety"> Anxiety</label><br>
+                <label><input type="radio" name="exercise" value="Anger"> Anger</label><br>
+                <label><input type="radio" name="exercise" value="Frustration"> Frustration</label>
+            </div>
+
+            <div class="form-group">
+                <h3>2. how often do you feel these emotions?</h3>
+                <label><input type="radio" name="transportation" value="Very often" required> very often</label><br>
+                <label><input type="radio" name="transportation" value="Not often"> not often</label><br>
+                
+            </div>
+
+            <div class="form-group">
+                <h3>3. rate your sleep cycle?</h3>
+                <label><input type="radio" name="weekends" value="Great" required> great</label><br>
+                <label><input type="radio" name="weekends" value="Good"> good</label><br>
+                <label><input type="radio" name="weekends" value="Horrible"> Horrible</label><br>
+                <label><input type="radio" name="weekends" value="Not bad"> not bad</label>
+            </div>
+
+            <div class="form-group">
+                <h3>4. Do you tend to find it difficult to concentrate?</h3>
+                <label><input type="radio" name="movies" value="Yes" required> Yes</label><br>
+                <label><input type="radio" name="movies" value="No"> No</label><br>
+                <label><input type="radio" name="movies" value="Perfer not to mention"> Prefer not to mention</label><br>
+                <label><input type="radio" name="movies" value="Maybe"> Maybe</label>
+            </div>
+
+            <div class="form-group">
+                <h3>5. Is there a particuler incident which bothers you?</h3>
+                <label><input type="radio" name="news" value="yes" required> Yes</label><br>
+                <label><input type="radio" name="news" value="no"> No</label><br>
+                <label><input type="radio" name="news" value="prefer not to mention"> Prefer not to mention</label><br>
+                <label><input type="radio" name="news" value="Maybe"> Maybe</label>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <button type="submit"> Submit Survey</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
