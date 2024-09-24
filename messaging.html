@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <title>TalkToTherapy</title>
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Header -->
+        <div class="chat-header">
+            <span class="username">User Name</span>
+            <div class="chat-buttons">
+                <button onclick="initiateCall()">Call</button>
+                <button onclick="recordAudio()">Voice Note</button>
+            </div>
+        </div>
+
+        <!-- Message Display Area -->
+        <div class="chat-messages" id="messages">
+            <div class="chat-message received">Hi there! How are you?</div>
+            <div class="chat-message sent">I'm good, thank you! How about you?</div>
+            <div class="chat-message received">I'm doing great!</div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="chat-footer">
+            <input type="text" id="messageInput" placeholder="Type a message" />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle sending messages
+        const messagesContainer = document.getElementById('messages');
+        const messageInput = document.getElementById('messageInput');
+
+        function sendMessage() {
+            const messageText = messageInput.value.trim();
+
+            if (messageText !== "") {
+                // Create a new message element
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('chat-message', 'sent');
+                messageElement.textContent = messageText;
+
+                // Append the message to the messages container
+                messagesContainer.appendChild(messageElement);
+
+                // Scroll to the bottom of the messages container
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+                // Clear the input field
+                messageInput.value = '';
+                messageInput.focus();
+            }
+        }
+
+        function initiateCall() {
+            alert("Initiating a call (this is a demo function).");
+        }
+
+        function recordAudio() {
+            alert("Recor
