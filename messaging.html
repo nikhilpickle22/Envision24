@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
-    <title>WhatsApp-like Messaging Platform</title>
+    <title>Message</title>
+    <script src="/socket.io/socket.io.js"></script> <!-- Add this line for Socket.IO -->
 </head>
 <body>
     <div class="chat-container">
         <!-- Header -->
         <div class="chat-header">
-            <span class="username">User Name</span>
+            <span class="username">Therapist </span>
             <div class="chat-buttons">
                 <button onclick="initiateCall()">Call</button>
                 <button onclick="recordAudio()">Voice Note</button>
@@ -26,36 +27,63 @@
 
         <!-- Input Area -->
         <div class="chat-footer">
-            <input type="text" id="messageInput" placeholder="Type a message" />
-            <button onclick="sendMessage()">Send</button>
+            <input type="text" id="message-input" placeholder="Type a message" />
+            <button id="send-btn">Send</button>
         </div>
     </div>
 
     <script>
-        // JavaScript to handle sending messages
-        const messagesContainer = document.getElementById('messages');
-        const messageInput = document.getElementById('messageInput');
+        // Establish a socket connection
+        const socket = io('http://localhost:3000'); // Adjust the port if needed
 
+        // DOM elements
+        const messageInput = document.getElementById('message-input');
+        const chatBox = document.getElementById('chat-box');
+        const sendBtn = document.getElementById('send-btn');
+
+        // Function to send a message
         function sendMessage() {
+            console.log("Function call ");
             const messageText = messageInput.value.trim();
-
             if (messageText !== "") {
-                // Create a new message element
-                const messageElement = document.createElement('div');
-                messageElement.classList.add('chat-message', 'sent');
-                messageElement.textContent = messageText;
+                // Emit the message to the server
+                socket.emit('chat message', messageText);
 
-                // Append the message to the messages container
-                messagesContainer.appendChild(messageElement);
+                // Display the sent message on the client side
+                //const messageElement = document.createElement('div');
+                //messageElement.classList.add('chat-message', 'sent');
+                //messageElement.textContent = messageText;
+                //chatBox.appendChild(messageElement);
 
-                // Scroll to the bottom of the messages container
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                // Scroll to the bottom of the chat box
+                chatBox.scrollTop = chatBox.scrollHeight;
 
                 // Clear the input field
                 messageInput.value = '';
                 messageInput.focus();
             }
         }
+
+        // Listen for messages from the server
+        socket.on('chat message', (msg) => {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('chat-message', 'received');
+            messageElement.textContent = msg;
+            chatBox.appendChild(messageElement);
+
+            // Scroll to the bottom of the chat box
+            chatBox.scrollTop = chatBox.scrollHeight;
+        });
+
+        // Handle click event for the send button
+        sendBtn.addEventListener('click', sendMessage);
+
+        // Allow pressing "Enter" to send a message
+        messageInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
 
         function initiateCall() {
             alert("Initiating a call (this is a demo function).");
@@ -64,13 +92,6 @@
         function recordAudio() {
             alert("Recording audio (this is a demo function).");
         }
-
-        // Allow pressing "Enter" to send a message
-        messageInput.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                sendMessage();
-            }
-        });
     </script>
 </body>
 </html>

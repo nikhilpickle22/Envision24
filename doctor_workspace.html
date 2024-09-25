@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Therapist Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/socket.io/socket.io.js"></script> <!-- Include Socket.IO script -->
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -203,12 +204,12 @@
             <!-- Chat Box (hidden initially) -->
             <div class="chat-box" id="chatBox">
                 <h3>Chat with <span id="patientName">Patient</span></h3>
-                <div class="messages" id="messageArea">
+                <div class="messages" id="chat-box">
                     <p><strong>Patient:</strong> I'm feeling very anxious lately...</p>
                     <p><strong>Therapist:</strong> Can you tell me more about what's causing this anxiety?</p>
                 </div>
                 <input type="text" id="message-input" placeholder="Type your message..." />
-                <button>Send</button>
+                <button id="send-btn">Send</button>
             </div>
         </div>
     </div>
@@ -241,6 +242,31 @@
                     },
                 }
             }
+        });
+
+        // Establish a socket connection
+        const socket = io('http://localhost:3000');
+
+        // DOM elements
+        const messageInput = document.getElementById('message-input');
+        const chatBox = document.getElementById('chat-box');
+        const sendBtn = document.getElementById('send-btn');
+
+        // Handle sending a message
+        sendBtn.addEventListener('click', () => {
+            const message = messageInput.value;
+            if (message) {
+                socket.emit('chat message', message); // Send the message to the server
+                messageInput.value = ''; // Clear input field
+            }
+        });
+
+        // Display received messages
+        socket.on('chat message', (msg) => {
+            const msgElement = document.createElement('p');
+            msgElement.textContent = `Patient: ${msg}`;
+            chatBox.appendChild(msgElement);
+            chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
         });
     </script>
 </body>
