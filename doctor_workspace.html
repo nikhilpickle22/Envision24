@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Therapist Workspace</title>
+    <title>Therapist Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -65,22 +66,63 @@
             font-size: 24px;
         }
 
-        .chat-box, .patient-info, .resources {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin: 20px 0;
-            padding: 20px;
+        .dashboard-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
         }
 
-        .chat-box h3, .patient-info h3, .resources h3 {
-            margin-bottom: 15px;
+        .pie-chart {
+            width: 45%;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .active-patients {
+            width: 45%;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .active-patients ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .active-patients ul li {
+            padding: 15px;
+            background-color: #f9f9f9;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .active-patients ul li:hover {
+            background-color: #e1f5fe;
+        }
+
+        /* Chat box */
+        .chat-box {
+            display: none;
+            margin-top: 20px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-box h3 {
             font-size: 20px;
             color: #4A90E2;
         }
 
         .chat-box .messages {
-            height: 300px;
+            height: 200px;
             overflow-y: auto;
             margin-bottom: 20px;
             border: 1px solid #ddd;
@@ -114,39 +156,6 @@
         .chat-box button:hover {
             background-color: #357ABD;
         }
-
-        .patient-info ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .patient-info ul li {
-            padding: 10px;
-            background-color: #f9f9f9;
-            margin-bottom: 10px;
-            border-radius: 4px;
-        }
-
-        .resources ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .resources ul li {
-            padding: 10px;
-            background-color: #f0f0f0;
-            margin-bottom: 10px;
-            border-radius: 4px;
-        }
-
-        .resources ul li a {
-            color: #4A90E2;
-            text-decoration: none;
-        }
-
-        .resources ul li a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
@@ -168,43 +177,71 @@
         <div class="content">
             <!-- Top Bar -->
             <div class="top-bar">
-                <h1>Therapist Workspace</h1>
+                <h1>Therapist Dashboard</h1>
                 <span>Logged in as: <strong>Dr. Emily Smith</strong></span>
             </div>
 
-            <!-- Patient Chat Section -->
-            <div class="chat-box">
-                <h3>Chat with Patient</h3>
-                <div class="messages">
+            <!-- Dashboard Section -->
+            <div class="dashboard-section">
+                <!-- Pie Chart for Patients -->
+                <div class="pie-chart">
+                    <h3>Patient Breakdown</h3>
+                    <canvas id="patientChart"></canvas>
+                </div>
+
+                <!-- Active Patients List -->
+                <div class="active-patients">
+                    <h3>Active Patients</h3>
+                    <ul>
+                        <li onclick="openChat('Patient 12345')">Patient 12345 (Anonymous)</li>
+                        <li onclick="openChat('Patient 67890')">Patient 67890 (Anonymous)</li>
+                        <li onclick="openChat('Patient 54321')">Patient 54321 (Anonymous)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Chat Box (hidden initially) -->
+            <div class="chat-box" id="chatBox">
+                <h3>Chat with <span id="patientName">Patient</span></h3>
+                <div class="messages" id="messageArea">
                     <p><strong>Patient:</strong> I'm feeling very anxious lately...</p>
                     <p><strong>Therapist:</strong> Can you tell me more about what's causing this anxiety?</p>
                 </div>
-                <input type="text" placeholder="Type your message..." />
+                <input type="text" id="message-input" placeholder="Type your message..." />
                 <button>Send</button>
-            </div>
-
-            <!-- Patient Info Section -->
-            <div class="patient-info">
-                <h3>Patient Information</h3>
-                <ul>
-                    <li><strong>Patient ID:</strong> 12345</li>
-                    <li><strong>Last Session:</strong> September 10, 2024</li>
-                    <li><strong>Diagnosis:</strong> Anxiety Disorder</li>
-                    <li><strong>Current Status:</strong> In Therapy</li>
-                </ul>
-            </div>
-
-            <!-- Resources Section -->
-            <div class="resources">
-                <h3>Helpful Resources</h3>
-                <ul>
-                    <li><a href="#">Anxiety Management Techniques</a></li>
-                    <li><a href="#">Meditation and Mindfulness Exercises</a></li>
-                    <li><a href="#">Mental Health Support Groups</a></li>
-                    <li><a href="#">Cognitive Behavioral Therapy (CBT) Tools</a></li>
-                </ul>
             </div>
         </div>
     </div>
+
+    <script>
+        // Function to show the chat box when a patient is clicked
+        function openChat(patient) {
+            document.getElementById("chatBox").style.display = "block";
+            document.getElementById("patientName").innerText = patient;
+        }
+
+        // Create a pie chart using Chart.js
+        var ctx = document.getElementById('patientChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Depression', 'Anxiety', 'PTSD', 'Others'],
+                datasets: [{
+                    label: 'Patients',
+                    data: [45, 25, 15, 15],
+                    backgroundColor: ['#f1c40f', '#e74c3c', '#9b59b6', '#3498db'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                }
+            }
+        });
+    </script>
 </body>
 </html>
