@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mindsight - Choose Role</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            font-family: 'Arial', sans-serif;
+            height: 100%;
+            background-color: #F0F8FF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            color: #2F4F4F;
+            font-family: 'Georgia', serif;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: #4682B4;
+        }
+
+        .container {
+            background-color: #fff;
+            width: 400px;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #2F4F4F;
+            margin-bottom: 20px;
+        }
+
+        .role-btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #4682B4;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .role-btn:hover {
+            background-color: #5A9FD4;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Mindsight</h1>
+        <p>Empowering Mental Wellness</p>
+    </div>
+
+    <div class="container">
+        <h2>Are You a Patient or a Doctor?</h2>
+        <button class="role-btn" onclick="window.location.href='survey_page.html'">I am a Patient</button>
+        <button class="role-btn" onclick="window.location.href='doctor_register.html'">I am a Doctor</button>
+    </div>
+
+</body>
+</html>

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anonymous Patient Registration</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Patient Register</title>
     <style>
-        /* Global Styling */
         * {
             margin: 0;
             padding: 0;
@@ -15,53 +15,40 @@
         body, html {
             font-family: 'Arial', sans-serif;
             height: 100%;
-            background-color: #F0F8FF; /* Light calming background */
+            background-color: #F0F8FF;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
         }
 
-        .form-container {
-            background-color: #FFFFFF;
+        .container {
+            background-color: #fff;
+            width: 400px;
             padding: 40px;
             border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
+            text-align: center;
         }
 
         h1 {
             font-size: 28px;
             color: #2F4F4F;
-            text-align: center;
             margin-bottom: 20px;
         }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            font-size: 16px;
-            color: #4682B4;
-            margin-bottom: 8px;
-        }
-
-        input[type="text"],
-        input[type="password"] {
+        input {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ccc;
+            margin: 10px 0;
             border-radius: 8px;
+            border: 1px solid #ccc;
             font-size: 16px;
-            margin-bottom: 10px;
         }
 
-        button[type="submit"] {
+        .btn {
             width: 100%;
             padding: 12px;
+            margin-top: 20px;
             background-color: #4682B4;
             color: white;
             border: none;
@@ -71,39 +58,43 @@
             transition: background-color 0.3s;
         }
 
-        button[type="submit"]:hover {
+        .btn:hover {
             background-color: #5A9FD4;
         }
 
-        p {
-            font-size: 14px;
+        .switch-link {
+            display: inline-block;
+            margin-top: 15px;
             color: #4682B4;
-            text-align: center;
+            text-decoration: none;
         }
+
+        .switch-link:hover {
+            text-decoration: underline;
+        }
+
+        .message {
+            font-size: 14px;
+            color: #555;
+            margin-top: 20px;
+        }
+
     </style>
 </head>
 <body>
-    <div class="form-container">
-        <h1>Register Anonymously</h1>
-        <p>Create an anonymous account with a random username and password.</p>
-        <form action="messaging.html" method="POST">
-            <!-- Random Username Field -->
-            <div class="form-group">
-                <label for="username">Choose a Username (can be any name):</label>
-                <input type="text" id="username" name="username" required>
-            </div>
 
-            <!-- Password Field -->
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-
-            <!-- Submit Button -->
-            <div class="form-group">
-                <button type="submit">Register</button>
-            </div>
+    <div class="container">
+        <h1>Patient Registration</h1>
+        <!-- Sign Up Form for Patient -->
+        <form action="patient_dashboard.html" method="get">
+            <input type="text" id="name" name="name" placeholder="Your Name" required>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <button class="btn" type="submit">Sign Up</button>
         </form>
+
+        <p class="message">Already registered? <a href="patient_login.html" class="switch-link">Sign In</a></p>
     </div>
+
 </body>
 </html>

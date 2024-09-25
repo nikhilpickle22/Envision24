@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mindsight - Choose Role</title>
+    <title>Mental Health Support Platform</title>
     <style>
+        /* Universal Reset */
         * {
             margin: 0;
             padding: 0;
@@ -15,74 +16,162 @@
         body, html {
             font-family: 'Arial', sans-serif;
             height: 100%;
-            background-color: #F0F8FF;
+            background-color: #F0F8FF; /* Light calming blue */
+            color: #444;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .header h1 {
-            font-size: 48px;
-            color: #2F4F4F;
-            font-family: 'Georgia', serif;
-        }
-
-        .header p {
-            font-size: 16px;
-            color: #4682B4;
         }
 
         .container {
             background-color: #fff;
-            width: 400px;
-            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+            padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
-        h2 {
-            font-size: 24px;
-            color: #2F4F4F;
+        h1 {
+            font-size: 32px;
+            color: #2F4F4F; /* Soft deep teal for calmness */
             margin-bottom: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
 
-        .role-btn {
-            width: 100%;
-            padding: 12px;
-            margin-top: 20px;
-            background-color: #4682B4;
-            color: white;
-            border: none;
-            border-radius: 8px;
+        p {
             font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .feature-box {
+            background-color: #E6F2FF; /* Gentle light blue */
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-10px);
+            background-color: #D1E7F5;
+        }
+
+        .feature-box h3 {
+            font-size: 22px;
+            color: #2F4F4F;
+            margin-bottom: 10px;
+        }
+
+        .feature-box p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .btn-container {
+            margin-top: 40px;
+        }
+
+        /* Use <a> tag styled as a button */
+        .cta-btn {
+            background-color: #4682B4; /* Calming blue */
+            color: white;
+            padding: 15px 40px;
+            font-size: 18px;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s ease, transform 0.3s;
         }
 
-        .role-btn:hover {
+        .cta-btn:hover {
             background-color: #5A9FD4;
+            transform: scale(1.05);
         }
 
+        footer {
+            margin-top: 50px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Extra Style for Calming Visuals */
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 200px;
+            width: 100%;
+            background: radial-gradient(circle at top, #ADD8E6 0%, transparent 100%);
+            z-index: -1;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom right, #B0E0E6, #F0F8FF);
+            z-index: -10;
+        }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>Mindsight</h1>
-        <p>Empowering Mental Wellness</p>
-    </div>
-
     <div class="container">
-        <h2>Are You a Patient or a Doctor?</h2>
-        <button class="role-btn" onclick="window.location.href='survey_page.html'">I am a Patient</button>
-        <button class="role-btn" onclick="window.location.href='doctor_register.html'">I am a Doctor</button>
+        <h1>Mind Sight!</h1>
+        <p>Welcome to your anonymous mental health support platform. With AI-powered matching and professional therapists, we are here to guide you through every step.</p>
+
+        <div class="features">
+            <div class="feature-box">
+                <h3>Anonymity</h3>
+                <p>Discuss your concerns freely and without revealing your identity, ensuring privacy and comfort.</p>
+            </div>
+            <div class="feature-box">
+                <h3>AI-Powered Matching</h3>
+                <p>Our AI understands your needs and connects you to a suitable therapist who can help.</p>
+            </div>
+            <div class="feature-box">
+                <h3>Personalized Support</h3>
+                <p>We ensure that the therapist you connect with specializes in your unique challenges.</p>
+            </div>
+            <div class="feature-box">
+                <h3>User-Friendly Interface</h3>
+                <p>Our platform is simple and intuitive, making it easy to find help without any hassle.</p>
+            </div>
+        </div>
+
+        <div class="btn-container">
+            <!-- Update Get Started Button to redirect to login page -->
+            <a href="login.html" class="cta-btn">Get Started</a>
+        </div>
+
+        <footer>
+            &copy; 2024 Mental Health Support Platform. All rights reserved.
+        </footer>
     </div>
 
 </body>
