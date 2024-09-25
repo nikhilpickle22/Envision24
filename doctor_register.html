@@ -7,24 +7,13 @@
     <title>Sign Up Page</title>
 </head>
 <body>
-    <h1 class="main-heading">Mindsight</h1> <!-- Centered heading -->
+    <h1 class="main-heading">Mindsight</h1> <!-- Added heading -->
     <div class="signup-container">
         <div class="signup-form">
             <h2>Sign Up</h2>
-            <form action="doctor_login.html" method="post" enctype="multipart/form-data">
+            <form action="login.html" method="post" enctype="multipart/form-data"> <!-- Make sure to include enctype -->
                 <div class="input-group">
                     <input type="text" placeholder="Enter your name" required>
-                </div>
-                <div class="input-group">
-                    <input type="number" placeholder="Enter your age" required>
-                </div>
-                <div class="input-group">
-                    <select id="sex" required>
-                        <option value="" disabled selected>Select your sex</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                    </select>
                 </div>
                 <div class="input-group">
                     <input type="email" placeholder="Enter your email" required>
@@ -33,18 +22,8 @@
                     <input type="password" placeholder="Create a password" required>
                 </div>
                 <div class="input-group">
-                    <label for="certifications">Upload your certificates:</label>
+                    <label for="certifications">Upload your documents:</label>
                     <input type="file" id="certifications" name="certifications" required>
-                </div>
-                <div class="input-group">
-                    <select id="specializations" required>
-                        <option value="" disabled selected>Select your specialization</option>
-                        <option value="anxiety">Anxiety</option>
-                        <option value="stress">Stress</option>
-                        <option value="ptsd">PTSD</option>
-                        <option value="relationship">Relationship</option>
-                        <option value="sleep">Sleep</option>
-                    </select>
                 </div>
                 <button type="submit" class="signup-button">Sign Up</button>
                 <div class="links">
